@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/packages/common_dependency_module/melos_common_dependency_module.iml" filepath="$PROJECT_DIR$/packages/common_dependency_module/melos_common_dependency_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/common_module/melos_common_module.iml" filepath="$PROJECT_DIR$/packages/common_module/melos_common_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/movies_module/melos_movies_module.iml" filepath="$PROJECT_DIR$/packages/movies_module/melos_movies_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/moviesappclients/melos_moviesappclients.iml" filepath="$PROJECT_DIR$/apps/moviesappclients/melos_moviesappclients.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/splash_module/melos_splash_module.iml" filepath="$PROJECT_DIR$/packages/splash_module/melos_splash_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_moviesappproj.iml" filepath="$PROJECT_DIR$/melos_moviesappproj.iml" />
+    </modules>
+  </component>
+</project>
