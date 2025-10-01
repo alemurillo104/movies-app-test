@@ -1,8 +1,10 @@
 import 'package:common_module/common_module.dart';
 import '../models/upcoming_movie_response.model.dart';
+import '../models/top_rated_movie_response.model.dart';
 import '../models/trending_movies_response.model.dart';
 import '../../domain/entities/trending_movie.entity.dart';
 import '../../domain/entities/upcoming_movies.entity.dart';
+import '../../domain/entities/top_rated_movie.entity.dart';
 
 class RemoteMoviesDataSource {
   final DioClient _client = DioClient();
@@ -26,6 +28,18 @@ class RemoteMoviesDataSource {
       return trendingResponse.results;
     } catch (e) {
       throw Exception('Error al obtener películas en tendencia: $e');
+    }
+  }
+
+  Future<List<TopRatedMovieEntity>> retrieveTopRatedMovies() async {
+    try {
+      final response = await _client.get('/movie/top_rated');
+
+      final topRatedResponse = TopRatedMoviesResponse.fromJson(response.data);
+
+      return topRatedResponse.toEntityList();
+    } catch (e) {
+      throw Exception('Error al obtener películas mejor valoradas: $e');
     }
   }
 }
