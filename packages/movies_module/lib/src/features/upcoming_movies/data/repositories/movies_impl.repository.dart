@@ -1,5 +1,6 @@
 import '../datasources/remote.datasource.dart';
 import '../../domain/entities/upcoming_movie.entity.dart';
+import '../../domain/entities/trending_movie.entity.dart';
 import '../../domain/repositories/movies.repository.dart';
 
 class MoviesImplRepository implements MoviesRepository {
@@ -13,5 +14,10 @@ class MoviesImplRepository implements MoviesRepository {
   Future<List<UpcomingMovieEntity>> retrieveUpcomingMovies() async {
     final response = await _dataSource.retrieveUpcomingMovies();
     return response.movies;
+  }
+
+  @override
+  Future<List<TrendingMovieEntity>> retrieveTopTrendMovies() async {
+    return await _dataSource.retrieveTopTrendMovies();
   }
 }
