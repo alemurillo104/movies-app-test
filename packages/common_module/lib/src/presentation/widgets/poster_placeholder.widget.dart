@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/upcoming_movie.entity.dart';
 
-class MoviePlaceholderWidget extends StatelessWidget {
-  final UpcomingMovieEntity movie;
+class PosterPlaceholderWidget extends StatelessWidget {
+  final String movieTitle;
 
-  const MoviePlaceholderWidget({
+  const PosterPlaceholderWidget({
     super.key,
-    required this.movie,
+    required this.movieTitle,
   });
 
   @override
@@ -17,7 +16,7 @@ class MoviePlaceholderWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            movie.title,
+            movieTitle,
             textAlign: TextAlign.center,
             maxLines: 4,
             overflow: TextOverflow.ellipsis,

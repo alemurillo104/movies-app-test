@@ -7,9 +7,10 @@ import '../features/movies/domain/repositories/movies.repository.dart';
 import '../features/movies/data/repositories/movies_impl.repository.dart';
 import '../features/movie_detail/domain/usecases/get_movie_detail.usecase.dart';
 import '../features/upcoming_movies/domain/usecases/get_upcoming_movies.usecase.dart';
-import '../features/top_rated_movies/domain/usecases/get_top_rated_movies.usecase.dart';
 import '../features/trending_movies/domain/usecases/get_top_trend_movies.usecase.dart';
 import '../features/upcoming_movies/presentation/blocs/bloc/upcoming_movies_bloc.dart';
+import '../features/trending_movies/presentation/blocs/bloc/trending_movies_bloc.dart';
+import '../features/top_rated_movies/domain/usecases/get_top_rated_movies.usecase.dart';
 
 late SharedPreferences _sharedPreferencesInstance;
 bool _sharedPreferencesInitialized = false;
@@ -41,6 +42,7 @@ class MoviesModularModule extends Module {
     i.add(GetTopRatedMoviesUseCase.new);
     i.add(GetMovieDetailUseCase.new);
     i.add(UpcomingMoviesBloc.new);
+    i.add(TrendingMoviesBloc.new);
   }
 
   @override

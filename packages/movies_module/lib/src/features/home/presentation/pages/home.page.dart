@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_module/movies_module.dart';
+import '../../../trending_movies/presentation/widgets/trending_movies_section.widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -27,6 +28,7 @@ class HomePage extends StatelessWidget {
           children: [
             SizedBox(height: 16),
             UpcomingMoviesSectionWidget(),
+            TrendingMoviesSectionWidget(),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(

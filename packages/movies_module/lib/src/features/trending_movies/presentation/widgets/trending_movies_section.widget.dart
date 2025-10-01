@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:common_module/common_module.dart';
 import 'package:movies_module/movies_module.dart';
 import 'package:common_dependency_module/common_dependency_module.dart';
-import '../blocs/bloc/upcoming_movies_bloc.dart';
+import '../blocs/bloc/trending_movies_bloc.dart';
 
-class UpcomingMoviesSectionWidget extends StatelessWidget {
-  const UpcomingMoviesSectionWidget({super.key});
+class TrendingMoviesSectionWidget extends StatelessWidget {
+  const TrendingMoviesSectionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          MoviesModularModule.injectorBloc<UpcomingMoviesBloc>()
+          MoviesModularModule.injectorBloc<TrendingMoviesBloc>()
             ..add(
-              const UpcomingMoviesFetched(),
+              const TrendingMoviesFetched(),
             ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +21,7 @@ class UpcomingMoviesSectionWidget extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Text(
-              "Próximos estrenos",
+              'Tendencia',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -29,10 +29,10 @@ class UpcomingMoviesSectionWidget extends StatelessWidget {
               ),
             ),
           ),
-          BlocBuilder<UpcomingMoviesBloc, UpcomingMoviesState>(
+          BlocBuilder<TrendingMoviesBloc, TrendingMoviesState>(
             builder: (context, state) {
               switch (state.status) {
-                case UpcomingMoviesStatus.success:
+                case TrendingMoviesStatus.success:
                   return SizedBox(
                     height: 250,
                     child: ListView.builder(
@@ -52,7 +52,7 @@ class UpcomingMoviesSectionWidget extends StatelessWidget {
                       },
                     ),
                   );
-                case UpcomingMoviesStatus.error:
+                case TrendingMoviesStatus.error:
                   return SizedBox(
                     height: 250,
                     child: Center(
@@ -66,7 +66,7 @@ class UpcomingMoviesSectionWidget extends StatelessWidget {
                       ),
                     ),
                   );
-                case UpcomingMoviesStatus.loading:
+                case TrendingMoviesStatus.loading:
                   return const SizedBox(
                     height: 250,
                     child: Center(
