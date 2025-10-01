@@ -1,16 +1,16 @@
 import 'package:common_module/common_module.dart';
 import 'package:common_dependency_module/common_dependency_module.dart';
-import '../features/home/presentation/pages/home.page.dart';
-import '../features/movies/data/datasources/local.datasource.dart';
-import '../features/movies/data/datasources/remote.datasource.dart';
-import '../features/movies/domain/repositories/movies.repository.dart';
-import '../features/movies/data/repositories/movies_impl.repository.dart';
-import '../features/movie_detail/domain/usecases/get_movie_detail.usecase.dart';
-import '../features/upcoming_movies/domain/usecases/get_upcoming_movies.usecase.dart';
-import '../features/trending_movies/domain/usecases/get_top_trend_movies.usecase.dart';
-import '../features/upcoming_movies/presentation/blocs/bloc/upcoming_movies_bloc.dart';
-import '../features/trending_movies/presentation/blocs/bloc/trending_movies_bloc.dart';
-import '../features/top_rated_movies/domain/usecases/get_top_rated_movies.usecase.dart';
+import '../features/movie/presentation/pages/home.page.dart';
+import '../features/movie/data/datasources/local.datasource.dart';
+import '../features/movie/data/datasources/remote.datasource.dart';
+import '../features/movie/domain/repositories/movies.repository.dart';
+import '../features/movie/data/repositories/movies_impl.repository.dart';
+import '../features/movie/domain/usecases/get_movie_detail.usecase.dart';
+import '../features/movie/domain/usecases/get_upcoming_movies.usecase.dart';
+import '../features/movie/domain/usecases/get_top_trend_movies.usecase.dart';
+import '../features/movie/domain/usecases/get_top_rated_movies.usecase.dart';
+import '../features/movie/presentation/blocs/trending_movies/trending_movies_bloc.dart';
+import '../features/movie/presentation/blocs/upcoming_movies/upcoming_movies_bloc.dart';
 
 late SharedPreferences _sharedPreferencesInstance;
 bool _sharedPreferencesInitialized = false;
