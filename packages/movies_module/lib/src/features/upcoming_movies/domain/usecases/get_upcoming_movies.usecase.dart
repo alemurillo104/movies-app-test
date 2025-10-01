@@ -1,5 +1,5 @@
 import '../entities/upcoming_movie.entity.dart';
-import '../repositories/movies.repository.dart';
+import '../../../movies/domain/repositories/movies.repository.dart';
 
 class GetUpcomingMoviesUseCase {
   final MoviesRepository _repository;

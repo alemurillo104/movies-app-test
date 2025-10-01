@@ -1,5 +1,5 @@
 import '../entities/top_rated_movie.entity.dart';
-import '../repositories/movies.repository.dart';
+import '../../../movies/domain/repositories/movies.repository.dart';
 
 class GetTopRatedMoviesUseCase {
   final MoviesRepository _repository;

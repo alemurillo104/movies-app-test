@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:common_dependency_module/common_dependency_module.dart';
 import 'movie_cached.widget.dart';
 import 'movie_placeholder.widget.dart';
 import '../../domain/entities/upcoming_movie.entity.dart';
