@@ -3,6 +3,7 @@ import '../features/home/presentation/pages/home.page.dart';
 import '../features/upcoming_movies/data/datasources/remote.datasource.dart';
 import '../features/upcoming_movies/domain/repositories/movies.repository.dart';
 import '../features/upcoming_movies/data/repositories/movies_impl.repository.dart';
+import '../features/upcoming_movies/domain/usecases/get_movie_detail.usecase.dart';
 import '../features/upcoming_movies/domain/usecases/get_upcoming_movies.usecase.dart';
 import '../features/upcoming_movies/domain/usecases/get_top_rated_movies.usecase.dart';
 import '../features/upcoming_movies/domain/usecases/get_top_trend_movies.usecase.dart';
@@ -18,6 +19,7 @@ class MoviesModularModule extends Module {
     i.add(GetUpcomingMoviesUseCase.new);
     i.add(GetTopTrendMoviesUseCase.new);
     i.add(GetTopRatedMoviesUseCase.new);
+    i.add(GetMovieDetailUseCase.new);
     i.add(UpcomingMoviesBloc.new);
   }
 
