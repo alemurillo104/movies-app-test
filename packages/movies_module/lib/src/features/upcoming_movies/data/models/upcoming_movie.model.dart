@@ -36,4 +36,22 @@ class UpcomingMovieModel extends UpcomingMovieEntity {
       video: json['video'] as bool,
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'overview': overview,
+      'popularity': popularity,
+      'vote_average': voteAverage,
+      'release_date': releaseDate,
+      'genre_ids': genreIds,
+      'adult': adult,
+      'original_title': originalTitle,
+      'original_language': originalLanguage,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
+      'video': video,
+      'vote_count': voteCount,
+    };
+  }
 }

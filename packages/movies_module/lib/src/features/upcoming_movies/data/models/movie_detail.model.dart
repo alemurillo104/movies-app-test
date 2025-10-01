@@ -48,4 +48,26 @@ class MovieDetailModel extends MovieDetailEntity {
       productionCompanies: companies,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'original_title': originalTitle,
+      'overview': overview,
+      'runtime': runtime,
+      'vote_average': voteAverage,
+      'release_date': releaseDate,
+      'budget': budget,
+      'revenue': revenue,
+      'poster_path': posterPath,
+      'backdrop_path': backdropPath,
+      'tagline': tagline,
+      'homepage': homepage,
+      'genres': genres.map((name) => {'name': name}).toList(),
+      'production_companies': productionCompanies
+          .map((company) => (company as dynamic).toJson())
+          .toList(),
+    };
+  }
 }
