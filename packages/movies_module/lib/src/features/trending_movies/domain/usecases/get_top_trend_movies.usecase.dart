@@ -1,5 +1,5 @@
 import '../entities/trending_movie.entity.dart';
-import '../repositories/movies.repository.dart';
+import '../../../movies/domain/repositories/movies.repository.dart';
 
 class GetTopTrendMoviesUseCase {
   final MoviesRepository _repository;

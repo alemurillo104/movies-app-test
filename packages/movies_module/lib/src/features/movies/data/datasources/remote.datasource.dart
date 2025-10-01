@@ -1,12 +1,12 @@
 import 'package:common_module/common_module.dart';
-import '../models/movie_detail.model.dart';
-import '../models/upcoming_movie_response.model.dart';
-import '../models/top_rated_movie_response.model.dart';
-import '../models/trending_movies_response.model.dart';
-import '../../domain/entities/movie_detail.entity.dart';
-import '../../domain/entities/trending_movie.entity.dart';
-import '../../domain/entities/upcoming_movies.entity.dart';
-import '../../domain/entities/top_rated_movie.entity.dart';
+import '../../../movie_detail/data/models/movie_detail.model.dart';
+import '../../../movie_detail/domain/entities/movie_detail.entity.dart';
+import '../../../trending_movies/domain/entities/trending_movie.entity.dart';
+import '../../../upcoming_movies/domain/entities/upcoming_movies.entity.dart';
+import '../../../top_rated_movies/domain/entities/top_rated_movie.entity.dart';
+import '../../../upcoming_movies/data/models/upcoming_movie_response.model.dart';
+import '../../../trending_movies/data/models/trending_movies_response.model.dart';
+import '../../../top_rated_movies/data/models/top_rated_movie_response.model.dart';
 
 class RemoteMoviesDataSource {
   final DioClient _client = DioClient();

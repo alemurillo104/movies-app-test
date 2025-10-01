@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'package:common_dependency_module/common_dependency_module.dart';
 import '../consts/cache_keys.const.dart';
-import '../models/movie_detail.model.dart';
 import '../exceptions/cache.exception.dart';
-import '../models/upcoming_movie.model.dart';
-import '../models/trending_movie.model.dart';
-import '../models/top_rated_movie.model.dart';
-import '../../domain/entities/movie_detail.entity.dart';
-import '../../domain/entities/upcoming_movie.entity.dart';
-import '../../domain/entities/trending_movie.entity.dart';
-import '../../domain/entities/top_rated_movie.entity.dart';
+import '../../../movie_detail/data/models/movie_detail.model.dart';
+import '../../../upcoming_movies/data/models/upcoming_movie.model.dart';
+import '../../../trending_movies/data/models/trending_movie.model.dart';
+import '../../../movie_detail/domain/entities/movie_detail.entity.dart';
+import '../../../top_rated_movies/data/models/top_rated_movie.model.dart';
+import '../../../upcoming_movies/domain/entities/upcoming_movie.entity.dart';
+import '../../../trending_movies/domain/entities/trending_movie.entity.dart';
+import '../../../top_rated_movies/domain/entities/top_rated_movie.entity.dart';
 
 class LocalMoviesDataSource {
   final SharedPreferences sharedPreferences;
