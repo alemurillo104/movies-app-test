@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:common_dependency_module/common_dependency_module.dart';
 
-class MovieImageCache extends StatelessWidget {
+class PosterImageCacheWidget extends StatelessWidget {
   final String imageUrl;
   final BoxFit fit;
 
-  const MovieImageCache({
+  const PosterImageCacheWidget({
     super.key,
     required this.imageUrl,
     this.fit = BoxFit.cover,

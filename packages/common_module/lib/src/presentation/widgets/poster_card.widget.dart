@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'movie_cached.widget.dart';
-import 'movie_placeholder.widget.dart';
-import '../../domain/entities/upcoming_movie.entity.dart';
+import 'poster_image_cache.widget.dart';
+import 'poster_placeholder.widget.dart';
 
-class MoviePosterCard extends StatelessWidget {
-  final UpcomingMovieEntity movie;
+class PosterCardWidget extends StatelessWidget {
+  final String imageBaseUrl;
+  final String movieTitle;
+  final String? moviePosterPath;
+  final double movieVoteAverage;
 
-  const MoviePosterCard({
+  const PosterCardWidget({
     super.key,
-    required this.movie,
+    this.imageBaseUrl = 'https://media.themoviedb.org/t/p/w440_and_h660_face/',
+    required this.movieTitle,
+    this.moviePosterPath,
+    required this.movieVoteAverage,
   });
-
-  //TODO: Mover logica al bloc
-  static const String _imageBaseUrl =
-      'https://media.themoviedb.org/t/p/w440_and_h660_face/';
 
   @override
   Widget build(BuildContext context) {
     final imageUrl =
-        movie.posterPath != null ? '$_imageBaseUrl${movie.posterPath}' : null;
+        moviePosterPath != null ? '$imageBaseUrl$moviePosterPath' : null;
 
     return InkWell(
       onTap: () {},
@@ -34,19 +35,19 @@ class MoviePosterCard extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 2 / 3,
                   child: imageUrl != null
-                      ? MovieImageCache(
+                      ? PosterImageCacheWidget(
                           imageUrl: imageUrl,
                           fit: BoxFit.cover,
                         )
-                      : MoviePlaceholderWidget(
-                          movie: movie,
+                      : PosterPlaceholderWidget(
+                          movieTitle: movieTitle,
                         ),
                 ),
               ),
             ),
             const SizedBox(height: 8),
             Text(
-              movie.title,
+              movieTitle,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
@@ -60,7 +61,7 @@ class MoviePosterCard extends StatelessWidget {
                 const Icon(Icons.star, color: Colors.amber, size: 14),
                 const SizedBox(width: 4),
                 Text(
-                  movie.voteAverage.toStringAsFixed(1),
+                  movieVoteAverage.toStringAsFixed(1),
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white70,
