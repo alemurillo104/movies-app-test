@@ -7,6 +7,7 @@ class PosterCardWidget extends StatelessWidget {
   final String movieTitle;
   final String? moviePosterPath;
   final double movieVoteAverage;
+  final Function()? onTap;
 
   const PosterCardWidget({
     super.key,
@@ -14,6 +15,7 @@ class PosterCardWidget extends StatelessWidget {
     required this.movieTitle,
     this.moviePosterPath,
     required this.movieVoteAverage,
+    this.onTap,
   });
 
   @override
@@ -21,15 +23,16 @@ class PosterCardWidget extends StatelessWidget {
     final imageUrl =
         moviePosterPath != null ? '$imageBaseUrl$moviePosterPath' : null;
 
-    return InkWell(
-      onTap: () {},
-      child: Container(
-        width: 140,
-        margin: const EdgeInsets.only(right: 12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
+    return Container(
+      width: 140,
+      margin: const EdgeInsets.only(right: 12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8.0),
+              onTap: onTap,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: AspectRatio(
@@ -45,32 +48,32 @@ class PosterCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              movieTitle,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            movieTitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
             ),
-            Row(
-              children: [
-                const Icon(Icons.star, color: Colors.amber, size: 14),
-                const SizedBox(width: 4),
-                Text(
-                  movieVoteAverage.toStringAsFixed(1),
-                  style: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.white70,
-                  ),
+          ),
+          Row(
+            children: [
+              const Icon(Icons.star, color: Colors.amber, size: 14),
+              const SizedBox(width: 4),
+              Text(
+                movieVoteAverage.toStringAsFixed(1),
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.white70,
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

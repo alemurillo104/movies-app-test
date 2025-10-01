@@ -45,6 +45,9 @@ class TrendingMoviesSectionWidget extends StatelessWidget {
                           movieTitle: movie.title,
                           movieVoteAverage: movie.voteAverage,
                           moviePosterPath: movie.posterPath,
+                          onTap: () {
+                            logger.d(movie.id);
+                          },
                         );
                       },
                     ),
