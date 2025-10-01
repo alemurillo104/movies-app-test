@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:common_dependency_module/common_dependency_module.dart';
+import 'package:movies_module/movies_module.dart';
 import 'src/core/navigation/modular.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MoviesModularModule.initializeSharedPreferences();
+
   runApp(
     ModularApp(
       module: CoreModularModule(),
