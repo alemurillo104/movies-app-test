@@ -22,10 +22,7 @@ class MoviePosterCard extends StatelessWidget {
         movie.posterPath != null ? '$_imageBaseUrl${movie.posterPath}' : null;
 
     return InkWell(
-      onTap: () {
-        logger.d('path : ${Modular.to.path}');
-        Modular.to.pushNamed('./movie-detail');
-      },
+      onTap: () {},
       child: Container(
         width: 140,
         margin: const EdgeInsets.only(right: 12.0),
