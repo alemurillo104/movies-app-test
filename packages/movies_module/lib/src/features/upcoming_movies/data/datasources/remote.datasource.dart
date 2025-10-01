@@ -1,7 +1,9 @@
 import 'package:common_module/common_module.dart';
+import '../models/movie_detail.model.dart';
 import '../models/upcoming_movie_response.model.dart';
 import '../models/top_rated_movie_response.model.dart';
 import '../models/trending_movies_response.model.dart';
+import '../../domain/entities/movie_detail.entity.dart';
 import '../../domain/entities/trending_movie.entity.dart';
 import '../../domain/entities/upcoming_movies.entity.dart';
 import '../../domain/entities/top_rated_movie.entity.dart';
@@ -40,6 +42,20 @@ class RemoteMoviesDataSource {
       return topRatedResponse.toEntityList();
     } catch (e) {
       throw Exception('Error al obtener películas mejor valoradas: $e');
+    }
+  }
+
+  Future<MovieDetailEntity> retrieveMovieDetail(int movieId) async {
+    try {
+      final response = await _client.get('/movie/$movieId');
+
+      final detailModel = MovieDetailModel.fromJson(response.data);
+
+      return detailModel;
+    } catch (e) {
+      throw Exception(
+        'Error al obtener el detalle de la película $movieId: $e',
+      );
     }
   }
 }
