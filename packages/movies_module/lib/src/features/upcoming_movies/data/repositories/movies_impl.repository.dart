@@ -1,4 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:common_module/common_module.dart';
+import '../models/movie_detail.model.dart';
+import '../models/upcoming_movie.model.dart';
+import '../models/trending_movie.model.dart';
+import '../datasources/local.datasource.dart';
+import '../models/top_rated_movie.model.dart';
 import '../datasources/remote.datasource.dart';
+import '../exceptions/no_connection.exception.dart';
 import '../../domain/entities/movie_detail.entity.dart';
 import '../../domain/entities/upcoming_movie.entity.dart';
 import '../../domain/entities/trending_movie.entity.dart';
@@ -6,30 +14,133 @@ import '../../domain/repositories/movies.repository.dart';
 import '../../domain/entities/top_rated_movie.entity.dart';
 
 class MoviesImplRepository implements MoviesRepository {
-  final RemoteMoviesDataSource _dataSource;
+  final RemoteMoviesDataSource _remoteDataSource;
+  final LocalMoviesDataSource _localDataSource;
+  final NetworkInfo _networkInfo;
 
   MoviesImplRepository({
-    required RemoteMoviesDataSource dataSource,
-  }) : _dataSource = dataSource;
+    required RemoteMoviesDataSource remoteDataSource,
+    required LocalMoviesDataSource localDataSource,
+    required NetworkInfo networkInfo,
+  })  : _remoteDataSource = remoteDataSource,
+        _localDataSource = localDataSource,
+        _networkInfo = networkInfo;
 
   @override
   Future<List<UpcomingMovieEntity>> retrieveUpcomingMovies() async {
-    final response = await _dataSource.retrieveUpcomingMovies();
-    return response.movies;
+    if (await _networkInfo.isConnected) {
+      try {
+        final response = await _remoteDataSource.retrieveUpcomingMovies();
+        final remoteMovies = response.movies;
+
+        final models = remoteMovies
+            .map(
+              (e) => e as UpcomingMovieModel,
+            )
+            .toList();
+        await _localDataSource.saveUpcomingMovies(models);
+
+        return remoteMovies;
+      } catch (e) {
+        debugPrint(
+          'Error remoto al obtener próximos estrenos: $e. Intentando caché...',
+        );
+        return await _localDataSource.getUpcomingMovies();
+      }
+    } else {
+      debugPrint('Sin conexión. Obteniendo próximos estrenos desde caché...');
+      try {
+        return await _localDataSource.getUpcomingMovies();
+      } catch (e) {
+        throw NoConnectionAndNoCacheException();
+      }
+    }
   }
 
   @override
   Future<List<TrendingMovieEntity>> retrieveTopTrendMovies() async {
-    return await _dataSource.retrieveTopTrendMovies();
+    if (await _networkInfo.isConnected) {
+      try {
+        final remoteMovies = await _remoteDataSource.retrieveTopTrendMovies();
+
+        final models = remoteMovies
+            .map(
+              (e) => e as TrendingMovieModel,
+            )
+            .toList();
+        await _localDataSource.saveTrendingMovies(models);
+
+        return remoteMovies;
+      } catch (e) {
+        debugPrint(
+          'Error remoto al obtener tendencias: $e. Intentando caché...',
+        );
+        return await _localDataSource.getTrendingMovies();
+      }
+    } else {
+      debugPrint('Sin conexión. Obteniendo tendencias desde caché...');
+      try {
+        return await _localDataSource.getTrendingMovies();
+      } catch (e) {
+        throw NoConnectionAndNoCacheException();
+      }
+    }
   }
 
   @override
   Future<List<TopRatedMovieEntity>> retrieveTopRatedMovies() async {
-    return await _dataSource.retrieveTopRatedMovies();
+    if (await _networkInfo.isConnected) {
+      try {
+        final remoteMovies = await _remoteDataSource.retrieveTopRatedMovies();
+        final models = remoteMovies
+            .map(
+              (e) => e as TopRatedMovieModel,
+            )
+            .toList();
+        await _localDataSource.saveTopRatedMovies(models);
+
+        return remoteMovies;
+      } catch (e) {
+        debugPrint(
+          'Error remoto al obtener mejor calificadas: $e. Intentando caché...',
+        );
+        return await _localDataSource.getTopRatedMovies();
+      }
+    } else {
+      debugPrint('Sin conexión. Obteniendo mejor calificadas desde caché...');
+      try {
+        return await _localDataSource.getTopRatedMovies();
+      } catch (e) {
+        throw NoConnectionAndNoCacheException();
+      }
+    }
   }
 
   @override
   Future<MovieDetailEntity> retrieveMovieDetail(int id) async {
-    return await _dataSource.retrieveMovieDetail(id);
+    if (await _networkInfo.isConnected) {
+      try {
+        final remoteDetail = await _remoteDataSource.retrieveMovieDetail(id);
+
+        final model = remoteDetail as MovieDetailModel;
+        await _localDataSource.saveMovieDetail(id, model);
+
+        return remoteDetail;
+      } catch (e) {
+        debugPrint(
+          'Error remoto al obtener detalle de la película $id: $e. Intentando caché...',
+        );
+        return await _localDataSource.getMovieDetail(id);
+      }
+    } else {
+      debugPrint(
+        'Sin conexión. Obteniendo detalle de la película $id desde caché...',
+      );
+      try {
+        return await _localDataSource.getMovieDetail(id);
+      } catch (e) {
+        throw NoConnectionAndNoCacheException();
+      }
+    }
   }
 }
