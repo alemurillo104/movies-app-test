@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:common_dependency_module/common_dependency_module.dart';
 import 'package:common_module/common_module.dart';
 import '../models/movie_detail.model.dart';
 import '../models/upcoming_movie.model.dart';
@@ -42,13 +42,13 @@ class MoviesImplRepository implements MoviesRepository {
 
         return remoteMovies;
       } catch (e) {
-        debugPrint(
+        logger.d(
           'Error remoto al obtener próximos estrenos: $e. Intentando caché...',
         );
         return await _localDataSource.getUpcomingMovies();
       }
     } else {
-      debugPrint('Sin conexión. Obteniendo próximos estrenos desde caché...');
+      logger.d('Sin conexión. Obteniendo próximos estrenos desde caché...');
       try {
         return await _localDataSource.getUpcomingMovies();
       } catch (e) {
@@ -72,13 +72,13 @@ class MoviesImplRepository implements MoviesRepository {
 
         return remoteMovies;
       } catch (e) {
-        debugPrint(
+        logger.d(
           'Error remoto al obtener tendencias: $e. Intentando caché...',
         );
         return await _localDataSource.getTrendingMovies();
       }
     } else {
-      debugPrint('Sin conexión. Obteniendo tendencias desde caché...');
+      logger.d('Sin conexión. Obteniendo tendencias desde caché...');
       try {
         return await _localDataSource.getTrendingMovies();
       } catch (e) {
@@ -101,13 +101,13 @@ class MoviesImplRepository implements MoviesRepository {
 
         return remoteMovies;
       } catch (e) {
-        debugPrint(
+        logger.d(
           'Error remoto al obtener mejor calificadas: $e. Intentando caché...',
         );
         return await _localDataSource.getTopRatedMovies();
       }
     } else {
-      debugPrint('Sin conexión. Obteniendo mejor calificadas desde caché...');
+      logger.d('Sin conexión. Obteniendo mejor calificadas desde caché...');
       try {
         return await _localDataSource.getTopRatedMovies();
       } catch (e) {
@@ -127,13 +127,13 @@ class MoviesImplRepository implements MoviesRepository {
 
         return remoteDetail;
       } catch (e) {
-        debugPrint(
+        logger.d(
           'Error remoto al obtener detalle de la película $id: $e. Intentando caché...',
         );
         return await _localDataSource.getMovieDetail(id);
       }
     } else {
-      debugPrint(
+      logger.d(
         'Sin conexión. Obteniendo detalle de la película $id desde caché...',
       );
       try {
