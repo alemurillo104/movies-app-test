@@ -7,6 +7,9 @@ export 'package:flutter_modular/flutter_modular.dart'
     hide ModularWatchExtension;
 
 export 'package:dio/dio.dart';
+export 'package:shared_preferences/shared_preferences.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
+export 'package:cached_network_image/cached_network_image.dart';
 
 /// A Calculator.
 class Calculator {
