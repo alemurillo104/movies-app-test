@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_module/movies_module.dart';
 import '../widgets/trending_movies_section.widget.dart';
+import '../widgets/recommended_movies_section.widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -29,18 +30,7 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 16),
             UpcomingMoviesSectionWidget(),
             TrendingMoviesSectionWidget(),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Otras Categorías de Películas...',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white70,
-                ),
-              ),
-            ),
-            SizedBox(height: 300),
+            RecommendedMoviesSectionWidget(),
           ],
         ),
       ),
