@@ -113,7 +113,12 @@ class _RecommendedMoviesSectionWidgetState
                           movieTitle: movie.title,
                           movieVoteAverage: movie.voteAverage,
                           moviePosterPath: movie.posterPath,
-                          onTap: () {},
+                          onTap: () {
+                            Modular.to.pushNamed(
+                              './movie-detail',
+                              arguments: movie.id,
+                            );
+                          },
                         );
                       },
                     ),
