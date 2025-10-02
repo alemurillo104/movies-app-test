@@ -36,8 +36,9 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('should render with CustomPaint widget',
-        (WidgetTester tester) async {
+    testWidgets('should render with CustomPaint widget', (
+      WidgetTester tester,
+    ) async {
       // Arrange & Act
       await tester.pumpWidget(
         MaterialApp(
@@ -54,11 +55,13 @@ void main() {
         ),
       );
 
-      // Assert - Just verify that CustomPaint exists and renders
-      expect(find.byType(CustomPaint), findsOneWidget);
-      final customPaint =
-          tester.widget<CustomPaint>(find.byType(CustomPaint).first);
-      expect(customPaint.painter, isA<DottedBorderPainter>());
+      // Assert - Find the specific CustomPaint with our painter
+      final customPaintWidgets =
+          tester.widgetList<CustomPaint>(find.byType(CustomPaint));
+      final ourCustomPaint = customPaintWidgets.firstWhere(
+        (widget) => widget.painter is DottedBorderPainter,
+      );
+      expect(ourCustomPaint.painter, isA<DottedBorderPainter>());
     });
 
     test('should be const constructor', () {
