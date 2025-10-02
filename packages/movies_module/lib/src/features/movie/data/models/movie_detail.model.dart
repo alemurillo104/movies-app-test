@@ -1,4 +1,5 @@
 import 'genre.model.dart';
+import 'spoken_languages.model.dart';
 import 'production_company.model.dart';
 import '../../domain/entities/movie_detail.entity.dart';
 
@@ -19,6 +20,7 @@ class MovieDetailModel extends MovieDetailEntity {
     required super.homepage,
     required super.genres,
     required super.productionCompanies,
+    required super.spokenLanguages,
   });
 
   factory MovieDetailModel.fromJson(Map<String, dynamic> json) {
@@ -28,6 +30,9 @@ class MovieDetailModel extends MovieDetailEntity {
 
     final companies = (json['production_companies'] as List)
         .map((e) => ProductionCompanyModel.fromJson(e as Map<String, dynamic>))
+        .toList();
+    final spokenLanguages = (json['spoken_languages'] as List)
+        .map((sl) => SpokenLanguageModel.fromJson(sl as Map<String, dynamic>))
         .toList();
 
     return MovieDetailModel(
@@ -46,6 +51,7 @@ class MovieDetailModel extends MovieDetailEntity {
       homepage: json['homepage'] as String,
       genres: genres,
       productionCompanies: companies,
+      spokenLanguages: spokenLanguages,
     );
   }
 
@@ -64,9 +70,16 @@ class MovieDetailModel extends MovieDetailEntity {
       'backdrop_path': backdropPath,
       'tagline': tagline,
       'homepage': homepage,
-      'genres': genres.map((name) => {'name': name}).toList(),
+      'genres': genres
+          .map(
+            (genre) => (genre as GenreModel).toJson(),
+          )
+          .toList(),
       'production_companies': productionCompanies
-          .map((company) => (company as dynamic).toJson())
+          .map((company) => (company as ProductionCompanyModel).toJson())
+          .toList(),
+      'spoken_languages': spokenLanguages
+          .map((sl) => (sl as SpokenLanguageModel).toJson())
           .toList(),
     };
   }

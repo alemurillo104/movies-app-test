@@ -11,6 +11,7 @@ import '../features/movie/domain/usecases/get_top_trend_movies.usecase.dart';
 import '../features/movie/domain/usecases/get_top_rated_movies.usecase.dart';
 import '../features/movie/presentation/blocs/trending_movies/trending_movies_bloc.dart';
 import '../features/movie/presentation/blocs/upcoming_movies/upcoming_movies_bloc.dart';
+import '../features/movie/presentation/blocs/recommended_movies/recommended_movies_bloc.dart';
 
 late SharedPreferences _sharedPreferencesInstance;
 bool _sharedPreferencesInitialized = false;
@@ -43,6 +44,7 @@ class MoviesModularModule extends Module {
     i.add(GetMovieDetailUseCase.new);
     i.add(UpcomingMoviesBloc.new);
     i.add(TrendingMoviesBloc.new);
+    i.add(RecommendedMoviesBloc.new);
   }
 
   @override

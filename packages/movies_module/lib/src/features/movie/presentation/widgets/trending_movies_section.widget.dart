@@ -19,7 +19,7 @@ class TrendingMoviesSectionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Text(
               'Tendencia',
               style: TextStyle(
@@ -37,7 +37,7 @@ class TrendingMoviesSectionWidget extends StatelessWidget {
                     height: 250,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemCount: state.movies.length,
                       itemBuilder: (context, index) {
                         final movie = state.movies[index];
@@ -57,7 +57,7 @@ class TrendingMoviesSectionWidget extends StatelessWidget {
                     height: 250,
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16),
                         child: Text(
                           state.message!,
                           textAlign: TextAlign.center,

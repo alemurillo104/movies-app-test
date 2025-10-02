@@ -1,4 +1,5 @@
 import 'genre.entity.dart';
+import 'spoken_languages.entity.dart';
 import 'production_company.entity.dart';
 
 class MovieDetailEntity {
@@ -17,6 +18,7 @@ class MovieDetailEntity {
   final String homepage;
   final List<GenreEntity> genres;
   final List<ProductionCompanyEntity> productionCompanies;
+  final List<SpokenLanguageEntity> spokenLanguages;
 
   const MovieDetailEntity({
     required this.id,
@@ -34,5 +36,6 @@ class MovieDetailEntity {
     required this.homepage,
     required this.genres,
     required this.productionCompanies,
+    required this.spokenLanguages,
   });
 }
