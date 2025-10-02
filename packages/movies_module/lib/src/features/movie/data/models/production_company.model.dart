@@ -16,4 +16,13 @@ class ProductionCompanyModel extends ProductionCompanyEntity {
       originCountry: json['origin_country'] as String,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'logo_path': logoPath,
+      'name': name,
+      'origin_country': originCountry,
+    };
+  }
 }
