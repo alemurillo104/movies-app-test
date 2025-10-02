@@ -1,12 +1,63 @@
+import 'package:common_module/common_module.dart';
 import 'package:common_dependency_module/common_dependency_module.dart';
-import '../features/home/presentation/pages/home.page.dart';
+import '../features/movie/presentation/pages/home.page.dart';
+import '../features/movie/data/datasources/local.datasource.dart';
+import '../features/movie/data/datasources/remote.datasource.dart';
+import '../features/movie/domain/repositories/movies.repository.dart';
+import '../features/movie/data/repositories/movies_impl.repository.dart';
+import '../features/movie/domain/usecases/get_movie_detail.usecase.dart';
+import '../features/movie/domain/usecases/get_upcoming_movies.usecase.dart';
+import '../features/movie/domain/usecases/get_top_trend_movies.usecase.dart';
+import '../features/movie/domain/usecases/get_top_rated_movies.usecase.dart';
+import '../features/movie/presentation/blocs/movie_detail/movie_detail_bloc.dart';
+import '../features/movie/presentation/blocs/trending_movies/trending_movies_bloc.dart';
+import '../features/movie/presentation/blocs/upcoming_movies/upcoming_movies_bloc.dart';
+import 'package:movies_module/src/features/movie/presentation/pages/movie_detail.page.dart';
+import '../features/movie/presentation/blocs/recommended_movies/recommended_movies_bloc.dart';
+
+late SharedPreferences _sharedPreferencesInstance;
+bool _sharedPreferencesInitialized = false;
 
 class MoviesModularModule extends Module {
+  static T injectorBloc<T extends Bloc>() => Modular.get<T>();
+
+  static Future<void> initializeSharedPreferences() async {
+    _sharedPreferencesInstance = await SharedPreferences.getInstance();
+    _sharedPreferencesInitialized = true;
+  }
+
   @override
-  void binds(Injector i) {}
+  void binds(Injector i) {
+    i.addLazySingleton<SharedPreferences>(() {
+      if (!_sharedPreferencesInitialized) {
+        throw Exception('SharedPreferences no ha sido inicializado.');
+      }
+      return _sharedPreferencesInstance;
+    });
+
+    i.add<Connectivity>(() => Connectivity());
+    i.add<NetworkInfo>(NetworkInfoImpl.new);
+    i.add(RemoteMoviesDataSource.new);
+    i.add(LocalMoviesDataSource.new);
+    i.add<MoviesRepository>(MoviesImplRepository.new);
+    i.add(GetUpcomingMoviesUseCase.new);
+    i.add(GetTopTrendMoviesUseCase.new);
+    i.add(GetTopRatedMoviesUseCase.new);
+    i.add(GetMovieDetailUseCase.new);
+    i.add(UpcomingMoviesBloc.new);
+    i.add(TrendingMoviesBloc.new);
+    i.add(RecommendedMoviesBloc.new);
+    i.add(MovieDetailBloc.new);
+  }
 
   @override
   void routes(r) {
     r.child('/', child: (context) => const HomePage());
+    r.child(
+      '/movie-detail',
+      child: (context) => MovieDetailPage(
+        movieId: r.args.data,
+      ),
+    );
   }
 }

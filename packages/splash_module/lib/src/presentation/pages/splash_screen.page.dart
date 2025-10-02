@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:common_dependency_module/common_dependency_module.dart';
+import '../widgets/logo.widget.dart';
 import '../../../navigation/navigation.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -9,11 +10,27 @@ class SplashScreenPage extends StatefulWidget {
   State<SplashScreenPage> createState() => _SplashScreenPageState();
 }
 
-class _SplashScreenPageState extends State<SplashScreenPage> {
+class _SplashScreenPageState extends State<SplashScreenPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), _goToHomePage);
     super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 700),
+      vsync: this,
+    );
+
+    _opacityAnimation = Tween<double>(begin: 1, end: 0).animate(_controller);
+
+    _opacityAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) _goToHomePage();
+    });
+
+    Future.delayed(const Duration(seconds: 2), () => _controller.forward());
   }
 
   _goToHomePage() {
@@ -22,47 +39,32 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    const gradient = LinearGradient(
+      colors: [
+        Color(0xFF000000),
+        Color(0xFF6A0707),
+      ],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+
     return Scaffold(
-      backgroundColor: Colors.deepPurpleAccent.shade200,
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(25),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(70),
-                color: const Color.fromARGB(255, 197, 164, 254),
-                boxShadow: const [
-                  BoxShadow(
-                    blurRadius: 5,
-                    offset: Offset(2, 2),
-                    color: Colors.black38,
-                    spreadRadius: 0.2,
-                  )
-                ],
-              ),
-              child: const SizedBox(
-                height: 150,
-                width: 150,
-                child: Icon(
-                  Icons.movie,
-                  size: 90,
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              'Movies App',
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          gradient: gradient,
+        ),
+        child: Center(
+          child: FadeTransition(
+            opacity: _opacityAnimation,
+            child: const LogoWidget(),
+          ),
         ),
       ),
     );
