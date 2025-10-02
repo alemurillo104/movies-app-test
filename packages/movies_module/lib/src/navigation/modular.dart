@@ -9,8 +9,10 @@ import '../features/movie/domain/usecases/get_movie_detail.usecase.dart';
 import '../features/movie/domain/usecases/get_upcoming_movies.usecase.dart';
 import '../features/movie/domain/usecases/get_top_trend_movies.usecase.dart';
 import '../features/movie/domain/usecases/get_top_rated_movies.usecase.dart';
+import '../features/movie/presentation/blocs/movie_detail/movie_detail_bloc.dart';
 import '../features/movie/presentation/blocs/trending_movies/trending_movies_bloc.dart';
 import '../features/movie/presentation/blocs/upcoming_movies/upcoming_movies_bloc.dart';
+import 'package:movies_module/src/features/movie/presentation/pages/movie_detail.page.dart';
 import '../features/movie/presentation/blocs/recommended_movies/recommended_movies_bloc.dart';
 
 late SharedPreferences _sharedPreferencesInstance;
@@ -45,10 +47,17 @@ class MoviesModularModule extends Module {
     i.add(UpcomingMoviesBloc.new);
     i.add(TrendingMoviesBloc.new);
     i.add(RecommendedMoviesBloc.new);
+    i.add(MovieDetailBloc.new);
   }
 
   @override
   void routes(r) {
     r.child('/', child: (context) => const HomePage());
+    r.child(
+      '/movie-detail',
+      child: (context) => MovieDetailPage(
+        movieId: r.args.data,
+      ),
+    );
   }
 }
