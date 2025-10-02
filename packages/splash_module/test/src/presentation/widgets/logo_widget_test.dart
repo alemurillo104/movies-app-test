@@ -19,9 +19,8 @@ void main() {
       expect(find.text('eMovie'), findsOneWidget);
     });
 
-    testWidgets('should have correct text styling', (
-      WidgetTester tester,
-    ) async {
+    testWidgets('should have correct text styling',
+        (WidgetTester tester) async {
       // Arrange & Act
       await tester.pumpWidget(
         const MaterialApp(

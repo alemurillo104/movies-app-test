@@ -1,0 +1,113 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "moviesappproj",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "moviesappclients",
+            "cwd": "apps\\moviesappclients",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "moviesappclients (profile mode)",
+            "cwd": "apps\\moviesappclients",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "moviesappclients (release mode)",
+            "cwd": "apps\\moviesappclients",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "common_dependency_module",
+            "cwd": "packages\\common_dependency_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "common_dependency_module (profile mode)",
+            "cwd": "packages\\common_dependency_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "common_dependency_module (release mode)",
+            "cwd": "packages\\common_dependency_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "common_module",
+            "cwd": "packages\\common_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "common_module (profile mode)",
+            "cwd": "packages\\common_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "common_module (release mode)",
+            "cwd": "packages\\common_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "movies_module",
+            "cwd": "packages\\movies_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "movies_module (profile mode)",
+            "cwd": "packages\\movies_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "movies_module (release mode)",
+            "cwd": "packages\\movies_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "splash_module",
+            "cwd": "packages\\splash_module",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "splash_module (profile mode)",
+            "cwd": "packages\\splash_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "splash_module (release mode)",
+            "cwd": "packages\\splash_module",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
